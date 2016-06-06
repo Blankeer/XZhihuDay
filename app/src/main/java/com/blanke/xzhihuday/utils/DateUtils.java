@@ -5,6 +5,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 
@@ -190,6 +191,20 @@ public class DateUtils {
      */
     public static String date2yyyyMMdd2(Date date) {
         return new SimpleDateFormat("yyyyMMdd").format(date);
+    }
+
+    public static Date nextDate(Date date) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(calendar.DATE, 1);//把日期往后增加一天.整数往后推,负数往前移动
+        return calendar.getTime();
+    }
+
+    public static Date lastDate(Date date) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        calendar.add(calendar.DATE, -1);//把日期往后增加一天.整数往后推,负数往前移动
+        return calendar.getTime();
     }
 
     /**

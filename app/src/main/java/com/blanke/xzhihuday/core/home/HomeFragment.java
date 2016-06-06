@@ -14,7 +14,9 @@ import com.blanke.xzhihuday.bean.LatestResponse;
 import com.blanke.xzhihuday.core.home.persenter.HomePersenter;
 import com.blanke.xzhihuday.core.home.persenter.HomePersenterImpl;
 import com.blanke.xzhihuday.core.home.view.HomeView;
+import com.blanke.xzhihuday.utils.DateUtils;
 import com.neu.refresh.NeuSwipeRefreshLayout;
+import com.neu.refresh.NeuSwipeRefreshLayoutDirection;
 import com.socks.library.KLog;
 
 import org.byteam.superadapter.SuperAdapter;
@@ -46,7 +48,7 @@ public class HomeFragment extends
     @Bind(R.id.errorView)
     TextView mErrorView;
 
-    private Date currentDate;
+    private Date currentDate, startDate;
     private SuperAdapter<ArticleBean> mAdapter;
     @Inject
     HomePersenterImpl mHomePersenter;
@@ -67,11 +69,21 @@ public class HomeFragment extends
     protected void initView() {
         mHomeRecyclerview.setLayoutManager(new LinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false));
         mHomeRecyclerview.setItemAnimator(new FadeInAnimator());
+        mHomeSwipelayout.setDirection(NeuSwipeRefreshLayoutDirection.BOTH);
+        mHomeSwipelayout.setOnRefreshListener(new NeuSwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh(NeuSwipeRefreshLayoutDirection neuSwipeRefreshLayoutDirection) {
+                if (neuSwipeRefreshLayoutDirection == NeuSwipeRefreshLayoutDirection.TOP) {
+                    currentDate = startDate;
+                }
+                loadData(true);
+            }
+        });
     }
 
     @Override
     protected void initData() {
-        currentDate = new Date();
+        startDate = currentDate = DateUtils.nextDate(new Date());
         mAdapter = new SuperAdapter<ArticleBean>(mainActivity, null, R.layout.item_article) {
             @Override
             public void onBind(SuperViewHolder holder, int viewType, int layoutPosition, ArticleBean item) {
@@ -81,7 +93,8 @@ public class HomeFragment extends
         mHomeRecyclerview.setAdapter(new SlideInBottomAnimationAdapter(mAdapter));
     }
 
-    private void nextDate() {
+    private void lastDate() {
+        currentDate=DateUtils.lastDate(currentDate);
     }
 
     private void initDagger2() {
@@ -103,7 +116,7 @@ public class HomeFragment extends
 
     @Override
     public void clickFab(FloatingActionButton fab) {
-
+        mHomeRecyclerview.smoothScrollToPosition(0);
     }
 
     @Override
@@ -120,8 +133,18 @@ public class HomeFragment extends
     @Override
     public void setData(LatestResponse data) {
         mLatestResponse = data;
-        mAdapter.addAll(data.getStories());
+        if (currentDate == startDate) {
+            mAdapter.replaceAll(data.getStories());
+        } else {
+            mAdapter.addAll(data.getStories());
+        }
         setFirstFinish();
+        lastDate();
+        stopRefre();
+    }
+
+    private void stopRefre() {
+        mHomeSwipelayout.setRefreshing(false);
     }
 
     @Override
