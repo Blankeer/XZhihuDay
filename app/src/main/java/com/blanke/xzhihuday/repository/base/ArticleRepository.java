@@ -11,6 +11,8 @@ import rx.Observable;
  * Created by blanke on 16-6-6.
  */
 public interface ArticleRepository {
+    Observable<LatestResponse> getLatestNowData();
+
     Observable<ArticleBean> getArticle(int id);
 
     Observable<LatestResponse> getLatestResponse(Date date);

@@ -193,6 +193,16 @@ public class DateUtils {
         return new SimpleDateFormat("yyyyMMdd").format(date);
     }
 
+    public static boolean isSameDay(Date date1, Date date2) {
+        Calendar calDateA = Calendar.getInstance();
+        calDateA.setTime(date1);
+        Calendar calDateB = Calendar.getInstance();
+        calDateB.setTime(date2);
+        return calDateA.get(Calendar.YEAR) == calDateB.get(Calendar.YEAR)
+                && calDateA.get(Calendar.MONTH) == calDateB.get(Calendar.MONTH)
+                && calDateA.get(Calendar.DAY_OF_MONTH) == calDateB.get(Calendar.DAY_OF_MONTH);
+    }
+
     public static Date nextDate(Date date) {
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(date);

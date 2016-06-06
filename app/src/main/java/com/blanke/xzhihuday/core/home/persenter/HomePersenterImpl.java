@@ -2,12 +2,14 @@ package com.blanke.xzhihuday.core.home.persenter;
 
 import com.blanke.xzhihuday.bean.LatestResponse;
 import com.blanke.xzhihuday.repository.factory.ArticleDataFactory;
+import com.blanke.xzhihuday.utils.DateUtils;
 import com.socks.library.KLog;
 
 import java.util.Date;
 
 import javax.inject.Inject;
 
+import rx.Observable;
 import rx.functions.Action1;
 
 /**
@@ -16,6 +18,7 @@ import rx.functions.Action1;
 public class HomePersenterImpl extends HomePersenter {
 
     private ArticleDataFactory mArticleDataFactory;
+    private Observable<LatestResponse> observer;
 
     @Inject
     public HomePersenterImpl(ArticleDataFactory mArticleDataFactory) {
@@ -26,8 +29,12 @@ public class HomePersenterImpl extends HomePersenter {
     public void getLatestData(boolean isPull, Date date) {
         if (getView() != null) {
             getView().showLoading(isPull);
-            mArticleDataFactory.getLatestResponse(date)
-                    .filter(latestResponse -> getView() != null)
+            if (DateUtils.isSameDay(date, new Date())) {
+                observer = mArticleDataFactory.getLatestNowData();
+            } else {
+                observer = mArticleDataFactory.getLatestResponse(date);
+            }
+            observer.filter(latestResponse -> getView() != null)
                     .subscribe(new Action1<LatestResponse>() {
                         @Override
                         public void call(LatestResponse latestResponse) {

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,6 +16,7 @@ import com.blanke.xzhihuday.core.home.persenter.HomePersenter;
 import com.blanke.xzhihuday.core.home.persenter.HomePersenterImpl;
 import com.blanke.xzhihuday.core.home.view.HomeView;
 import com.blanke.xzhihuday.utils.DateUtils;
+import com.bumptech.glide.Glide;
 import com.neu.refresh.NeuSwipeRefreshLayout;
 import com.neu.refresh.NeuSwipeRefreshLayoutDirection;
 import com.socks.library.KLog;
@@ -88,13 +90,17 @@ public class HomeFragment extends
             @Override
             public void onBind(SuperViewHolder holder, int viewType, int layoutPosition, ArticleBean item) {
                 holder.setText(R.id.item_article_title, item.getTitle());
+                ImageView iv = holder.getView(R.id.item_img);
+                Glide.with(mainActivity)
+                        .load(item.getImages().get(0))
+                        .into(iv);
             }
         };
         mHomeRecyclerview.setAdapter(new SlideInBottomAnimationAdapter(mAdapter));
     }
 
     private void lastDate() {
-        currentDate=DateUtils.lastDate(currentDate);
+        currentDate = DateUtils.lastDate(currentDate);
     }
 
     private void initDagger2() {
@@ -135,6 +141,7 @@ public class HomeFragment extends
         mLatestResponse = data;
         if (currentDate == startDate) {
             mAdapter.replaceAll(data.getStories());
+
         } else {
             mAdapter.addAll(data.getStories());
         }

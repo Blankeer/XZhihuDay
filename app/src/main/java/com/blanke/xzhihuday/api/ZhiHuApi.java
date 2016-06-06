@@ -13,7 +13,7 @@ import rx.Observable;
 public interface ZhiHuApi {
 
     @GET("news/latest")
-    Observable<LatestResponse> getLatestData();
+    Observable<LatestResponse> getLatestNowData();
 
     @GET("news/before/{date}")
     Observable<LatestResponse> getLatestData(@Path("date") String date);

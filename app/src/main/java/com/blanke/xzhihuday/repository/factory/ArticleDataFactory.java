@@ -26,6 +26,12 @@ public class ArticleDataFactory implements ArticleRepository {
         this.mSchedulers = mSchedulers;
     }
 
+    @Override
+    public Observable<LatestResponse> getLatestNowData() {
+        return mNetworkArticleRepository.getLatestNowData()
+                .compose(mSchedulers);
+    }
+
     public Observable<ArticleBean> getArticle(int id) {
         return mNetworkArticleRepository.getArticle(id)
                 .compose(mSchedulers);

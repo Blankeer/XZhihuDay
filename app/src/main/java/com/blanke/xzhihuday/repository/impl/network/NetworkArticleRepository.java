@@ -26,6 +26,11 @@ public class NetworkArticleRepository implements ArticleRepository {
     }
 
     @Override
+    public Observable<LatestResponse> getLatestNowData() {
+        return zhiHuApi.getLatestNowData();
+    }
+
+    @Override
     public Observable<ArticleBean> getArticle(int id) {
         return zhiHuApi.getArticle(id);
     }
