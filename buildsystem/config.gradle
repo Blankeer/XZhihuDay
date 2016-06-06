@@ -1,0 +1,86 @@
+def daggerVersion = "2.0.2"
+def retrofitVersion = "2.0.2"
+def supportVersion = "23.3.0"
+def rxBindingVersion = '0.4.0'
+
+def leakCanaryVersion = "1.3.1"
+def blockCanaryVersion = "1.2.1"
+def autovalueVersion='1.2'
+def mosbymvpVersion='2.0.0'
+
+ext {
+    applicationId = "com.blanke.xzhihuday"
+    buildToolsVersion = "23.0.2"
+    compileSdkVersion = 23
+    minSdkVersion = 15
+    targetSdkVersion = 23
+    versionCode = 1
+    versionName = "1.0.0"
+    abortOnLintError = false
+    checkLintRelease = false
+    useJack = false
+    abortOnLintError = false
+
+    javaVersion = JavaVersion.VERSION_1_8
+
+    libSupportAppcompat = "com.android.support:appcompat-v7:${supportVersion}"
+    libSupportDesign = "com.android.support:design:${supportVersion}"
+    libSupportRecyclerview = "com.android.support:recyclerview-v7:${supportVersion}"
+    libSupportV4 = "com.android.support:support-v4:${supportVersion}"
+    libSupportCardView = "com.android.support:cardview-v7:${supportVersion}"
+
+    libRxAndroid = "io.reactivex:rxandroid:1.2.0"
+    libRxJava = "io.reactivex:rxjava:1.1.1"
+    libEventBus = "org.greenrobot:eventbus:3.0.0"
+    libJavaxAnnotation = "javax.annotation:jsr250-api:1.0"
+
+    libGson = "com.google.code.gson:gson:2.4"
+    libRetrofit = "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    libRetrofitConverterGson = "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    libRetrofitAdapterRxJava = "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}"
+    libOkHttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:3.0.0-RC1"
+
+    libDagger = "com.google.dagger:dagger:${daggerVersion}"
+    libDaggerCompiler = "com.google.dagger:dagger-compiler:${daggerVersion}"
+
+    libGlide = "com.github.bumptech.glide:glide:3.7.0"
+
+    libRxBinding = "com.jakewharton.rxbinding:rxbinding:${rxBindingVersion}"
+    libRxBindingSupportV4 = "com.jakewharton.rxbinding:rxbinding-support-v4:${rxBindingVersion}"
+    libRxBindingAppcompatV7 = "com.jakewharton.rxbinding:rxbinding-appcompat-v7:${rxBindingVersion}"
+    libRxBindingDesign = "com.jakewharton.rxbinding:rxbinding-design:${rxBindingVersion}"
+    libRxBindingRecyclerview = "com.jakewharton.rxbinding:rxbinding-recyclerview-v7:${rxBindingVersion}"
+
+    debugDependencies = [
+            blockCanary: "com.github.moduth:blockcanary-android:${blockCanaryVersion}",
+            leakCanary: "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+    ]
+
+    releaseDependencies = [
+            blockCanary: "com.github.moduth:blockcanary-no-op:${blockCanaryVersion}",
+            leakCanary: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
+    ]
+    libMockito="org.mockito:mockito-core:1.+"
+    libZonedTime="com.jakewharton.threetenabp:threetenabp:1.0.3"
+    libAutoValue="com.google.auto.value:auto-value:${autovalueVersion}"
+    libAutoValueApt=libAutoValue
+    libAutoValuueGsonApt="com.ryanharter.auto.value:auto-value-gson:0.3.1"
+    libAutoValuueParcelApt="com.ryanharter.auto.value:auto-value-parcel:0.2.0"
+    libSqlbrite="com.squareup.sqlbrite:sqlbrite:0.6.3"
+    libSupportAnnotations="com.android.support:support-annotations:${supportVersion}"
+    libRESTMock="com.github.andrzejchm.RESTMock:android:0.1.1"
+    libRobolectric="org.robolectric:robolectric:3.0"
+    libButterknife="com.jakewharton:butterknife:7.0.1"
+    libMosbyMvp="com.hannesdorfmann.mosby:mvp:${mosbymvpVersion}"
+    libMosbyMvpState="com.hannesdorfmann.mosby:viewstate:${mosbymvpVersion}"
+    libSuperRecyclerView="com.malinskiy:superrecyclerview:1.1.4"
+    libMaterialProgressbar="me.zhanghai.android.materialprogressbar:library:1.1.5"
+    libBaseAdapter="org.byteam.superadapter:superadapter:3.3"
+    libAutoBundle="com.github.yatatsu:autobundle:2.0.0"
+    libAutoBundleAPT="com.github.yatatsu:autobundle-processor:2.0.0"
+    libLog="com.github.zhaokaiqiang.klog:library:1.3.0"
+    libXSwipeRefreshLayout="com.github.Blankeer:XSwipeRefreshLayout:1.0.0"
+    libRecyclerAnim="jp.wasabeef:recyclerview-animators:2.2.3"
+    libGilde="com.github.bumptech.glide:glide:3.7.0"
+    libHoldScaleImageView="com.github.Blankeer:HoldScaleImageView:0.1.3"
+}

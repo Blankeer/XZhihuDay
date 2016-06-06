@@ -1,0 +1,94 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId rootProject.ext.applicationId
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        multiDexEnabled true
+    }
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+    lintOptions {
+        abortOnError rootProject.ext.abortOnLintError//lint错误
+        checkReleaseBuilds rootProject.ext.checkLintRelease
+        quiet true
+        ignoreWarnings true
+        disable 'InvalidPackage'
+        disable 'OldTargetApi'
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+
+    compile rootProject.ext.libSupportAppcompat
+    compile rootProject.ext.libSupportDesign
+    compile rootProject.ext.libSupportRecyclerview
+    compile rootProject.ext.libSupportV4
+    compile rootProject.ext.libSupportCardView
+    testCompile rootProject.ext.libSupportAnnotations
+
+    compile rootProject.ext.libRxJava
+    compile rootProject.ext.libRxAndroid
+    compile rootProject.ext.libRxBinding
+
+    compile rootProject.ext.libGlide
+
+    provided rootProject.ext.libJavaxAnnotation
+    compile rootProject.ext.libDagger
+    apt rootProject.ext.libDaggerCompiler
+
+    testCompile rootProject.ext.libMockito
+    compile rootProject.ext.libZonedTime
+
+    compile rootProject.ext.libRESTMock
+    testCompile rootProject.ext.libRobolectric
+
+    compile rootProject.ext.libButterknife
+
+    compile rootProject.ext.libMosbyMvp
+    compile rootProject.ext.libMosbyMvpState
+
+    compile rootProject.ext.libRetrofit
+    compile rootProject.ext.libRetrofitConverterGson
+    compile rootProject.ext.libRetrofitAdapterRxJava
+
+
+    debugCompile rootProject.ext.debugDependencies.leakCanary
+    releaseCompile rootProject.ext.releaseDependencies.leakCanary
+    debugCompile rootProject.ext.debugDependencies.blockCanary
+    releaseCompile rootProject.ext.releaseDependencies.blockCanary
+
+    compile rootProject.ext.libMaterialProgressbar
+    compile rootProject.ext.libBaseAdapter
+    compile rootProject.ext.libAutoBundle
+    apt rootProject.ext.libAutoBundleAPT
+    compile rootProject.ext.libLog
+    compile rootProject.ext.libXSwipeRefreshLayout
+    compile rootProject.ext.libRecyclerAnim
+    compile rootProject.ext.libGilde
+}
