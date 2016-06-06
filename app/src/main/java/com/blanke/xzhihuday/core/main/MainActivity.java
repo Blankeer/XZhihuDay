@@ -1,7 +1,6 @@
 package com.blanke.xzhihuday.core.main;
 
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.blanke.xzhihuday.R;
 import com.blanke.xzhihuday.app.XApplication;
@@ -24,7 +24,8 @@ import com.blanke.xzhihuday.core.main.di.DaggerMainComponent;
 import com.blanke.xzhihuday.core.main.di.MainComponent;
 import com.blanke.xzhihuday.repository.factory.ArticleDataFactory;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnMenuTabClickListener;
+import com.roughike.bottombar.OnSizeDeterminedListener;
+import com.roughike.bottombar.OnTabClickListener;
 import com.socks.library.KLog;
 
 import javax.inject.Inject;
@@ -78,6 +79,7 @@ public class MainActivity extends BaseActivity {
     private void initView(Bundle savedInstanceState) {
         setSupportActionBar(toolbar);
         baseContentFragments = new BaseContentFragment[tabSize];
+        mViewPager.setOffscreenPageLimit(tabSize);
         mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -131,22 +133,30 @@ public class MainActivity extends BaseActivity {
 
     private void initBottomBar(Bundle savedInstanceState) {
         mBottomBar = BottomBar.attachShy(mCoordinatorLayout, mViewPager, savedInstanceState);
+//        mBottomBar=BottomBar.attach(this,savedInstanceState);
         mBottomBar.setItems(R.menu.main_bottombar_menu);
-        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+        mBottomBar.setOnTabClickListener(new OnTabClickListener() {
             @Override
-            public void onMenuTabSelected(@IdRes int menuItemId) {
-                mViewPager.setCurrentItem(getTabIndex(menuItemId));
+            public void onTabSelected(int position) {
+                mViewPager.setCurrentItem(position);
             }
 
             @Override
-            public void onMenuTabReSelected(@IdRes int menuItemId) {
-                getCurrentFragment().doubleClickTab();
+            public void onTabReSelected(int position) {
+                baseContentFragments[position].doubleClickTab();
             }
         });
         mBottomBar.mapColorForTab(0, ContextCompat.getColor(this, R.color.colorAccent));
         mBottomBar.mapColorForTab(1, 0xFF5D4037);
         mBottomBar.mapColorForTab(2, "#7B1FA2");
         mBottomBar.mapColorForTab(3, "#FF9800");
+        mBottomBar.getBarSize(new OnSizeDeterminedListener() {
+            @Override
+            public void onSizeReady(int size) {
+                ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) fab.getLayoutParams();
+                lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, size + 16);
+            }
+        });
     }
 
     /**
@@ -183,8 +193,8 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+//        getMenuInflater().inflate(R.menu.main, menu);
+        return false;
     }
 
     @Override

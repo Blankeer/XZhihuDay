@@ -14,9 +14,8 @@ import com.blanke.xzhihuday.bean.LatestResponse;
 import com.blanke.xzhihuday.core.home.persenter.HomePersenter;
 import com.blanke.xzhihuday.core.home.persenter.HomePersenterImpl;
 import com.blanke.xzhihuday.core.home.view.HomeView;
-import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
-import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 import com.neu.refresh.NeuSwipeRefreshLayout;
+import com.socks.library.KLog;
 
 import org.byteam.superadapter.SuperAdapter;
 import org.byteam.superadapter.internal.SuperViewHolder;
@@ -93,7 +92,8 @@ public class HomeFragment extends
 
     @Override
     protected void lazyLoad() {
-
+        KLog.d();
+        loadData(false);
     }
 
     @Override
@@ -111,15 +111,6 @@ public class HomeFragment extends
 
     }
 
-    @Override
-    public LceViewState<LatestResponse, HomeView> createViewState() {
-        return new RetainingLceViewState<>();
-    }
-
-    @Override
-    public LatestResponse getData() {
-        return mLatestResponse;
-    }
 
     @Override
     public HomePersenter createPresenter() {
@@ -130,6 +121,7 @@ public class HomeFragment extends
     public void setData(LatestResponse data) {
         mLatestResponse = data;
         mAdapter.addAll(data.getStories());
+        setFirstFinish();
     }
 
     @Override
