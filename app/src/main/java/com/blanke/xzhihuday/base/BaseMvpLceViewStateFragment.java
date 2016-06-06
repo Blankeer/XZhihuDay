@@ -21,8 +21,11 @@ public abstract class BaseMvpLceViewStateFragment<CV extends View, M, V extends 
         setRetainInstance(true);
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        initView();
         initData();
     }
+
+    protected abstract void initView();
 
     protected abstract void initData();
 

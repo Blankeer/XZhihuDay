@@ -2,6 +2,7 @@ package com.blanke.xzhihuday.core.main.di;
 
 import com.blanke.xzhihuday.app.di.AppComponent;
 import com.blanke.xzhihuday.app.di.scopes.PerActivity;
+import com.blanke.xzhihuday.core.home.di.ContentComponent;
 import com.blanke.xzhihuday.core.main.MainActivity;
 
 import dagger.Component;
@@ -14,4 +15,5 @@ import dagger.Component;
 public interface MainComponent {
     void inject(MainActivity mainActivity);
 
+    ContentComponent provideContentComponent();
 }

@@ -12,6 +12,7 @@ public class ProjectConfig {
     private static boolean isTestJunit = false;//测试是否在Junit
     private static boolean isTestApp = false;//测试是否是真机APP
     private static boolean isDebug = false;
+    public final static int TAB_SIZE = 4;
 
     public static boolean isTest() {
         return isTestApp || isTestApp;

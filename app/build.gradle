@@ -91,4 +91,5 @@ dependencies {
     compile rootProject.ext.libXSwipeRefreshLayout
     compile rootProject.ext.libRecyclerAnim
     compile rootProject.ext.libGilde
+    compile rootProject.ext.libBottomBar
 }

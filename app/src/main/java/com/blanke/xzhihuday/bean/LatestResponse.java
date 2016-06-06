@@ -58,5 +58,12 @@ public class LatestResponse {
         this.top_stories = top_stories;
     }
 
-
+    @Override
+    public String toString() {
+        return "LatestResponse{" +
+                "date=" + date +
+                ", stories=" + stories +
+                ", top_stories=" + top_stories +
+                '}';
+    }
 }

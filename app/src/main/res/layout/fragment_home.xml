@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@id/contentView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.neu.refresh.NeuSwipeRefreshLayout
+            android:id="@+id/home_swipelayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/home_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.neu.refresh.NeuSwipeRefreshLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/view_loading" />
+
+    <include layout="@layout/view_error" />
+</FrameLayout>

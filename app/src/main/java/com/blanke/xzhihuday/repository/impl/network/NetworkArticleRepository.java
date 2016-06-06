@@ -2,7 +2,11 @@ package com.blanke.xzhihuday.repository.impl.network;
 
 import com.blanke.xzhihuday.api.ZhiHuApi;
 import com.blanke.xzhihuday.bean.ArticleBean;
+import com.blanke.xzhihuday.bean.LatestResponse;
 import com.blanke.xzhihuday.repository.base.ArticleRepository;
+import com.blanke.xzhihuday.utils.DateUtils;
+
+import java.util.Date;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -24,5 +28,10 @@ public class NetworkArticleRepository implements ArticleRepository {
     @Override
     public Observable<ArticleBean> getArticle(int id) {
         return zhiHuApi.getArticle(id);
+    }
+
+    @Override
+    public Observable<LatestResponse> getLatestResponse(Date date) {
+        return zhiHuApi.getLatestData(DateUtils.date2yyyyMMdd2(date));
     }
 }

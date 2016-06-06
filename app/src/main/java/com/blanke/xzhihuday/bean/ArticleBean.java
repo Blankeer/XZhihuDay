@@ -178,7 +178,7 @@ public class ArticleBean {
     @Override
     public String toString() {
         return "ArticleBean{" +
-                "body='" + body.substring(0, 30) + '\'' +
+                "body='" + (body == null) + '\'' +
                 ", image_source='" + image_source + '\'' +
                 ", title='" + title + '\'' +
                 ", image='" + image + '\'' +

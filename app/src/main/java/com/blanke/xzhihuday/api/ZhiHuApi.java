@@ -15,6 +15,9 @@ public interface ZhiHuApi {
     @GET("news/latest")
     Observable<LatestResponse> getLatestData();
 
+    @GET("news/before/{date}")
+    Observable<LatestResponse> getLatestData(@Path("date") String date);
+
     @GET("news/{id}")
     Observable<ArticleBean> getArticle(@Path("id") int id);
 }
