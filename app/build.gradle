@@ -92,5 +92,5 @@ dependencies {
     compile rootProject.ext.libRecyclerAnim
     compile rootProject.ext.libGilde
     compile rootProject.ext.libBottomBar
-    compile rootProject.ext.libHoldScaleImageView
+    compile rootProject.ext.libBanner
 }

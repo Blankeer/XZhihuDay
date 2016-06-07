@@ -1,13 +1,18 @@
 package com.blanke.xzhihuday.core.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.holder.Holder;
 import com.blanke.xzhihuday.R;
 import com.blanke.xzhihuday.base.BaseContentFragment;
 import com.blanke.xzhihuday.bean.ArticleBean;
@@ -49,6 +54,8 @@ public class HomeFragment extends
     MaterialProgressBar mLoadingView;
     @Bind(R.id.errorView)
     TextView mErrorView;
+    @Bind(R.id.home_banner)
+    ConvenientBanner mConvenientBanner;
 
     private Date currentDate, startDate;
     private SuperAdapter<ArticleBean> mAdapter;
@@ -81,6 +88,40 @@ public class HomeFragment extends
                 loadData(true);
             }
         });
+
+    }
+
+    private void initBanner() {
+        mConvenientBanner.setPages(
+                new CBViewHolderCreator<NetworkImageHolderView>() {
+                    @Override
+                    public NetworkImageHolderView createHolder() {
+                        return new NetworkImageHolderView();
+                    }
+                }, mLatestResponse.getTop_stories())
+                //设置两个点图片作为翻页指示器，不设置则没有指示器，可以根据自己需求自行配合自己的指示器,不需要圆点指示器可用不设
+                .setPageIndicator(new int[]{R.drawable.ic_page_indicator, R.drawable.ic_page_indicator_focused})
+                //设置指示器的方向
+                .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
+        //设置翻页的效果，不需要翻页效果可用不设
+        //.setPageTransformer(Transformer.DefaultTransformer);
+
+    }
+
+    public static class NetworkImageHolderView implements Holder<ArticleBean> {
+        private ImageView imageView;
+
+        @Override
+        public View createView(Context context) {
+            imageView = new ImageView(context);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+            return imageView;
+        }
+
+        @Override
+        public void UpdateUI(Context context, int position, ArticleBean item) {
+            Glide.with(context).load(item.getImage()).into(imageView);
+        }
     }
 
     @Override
@@ -141,7 +182,7 @@ public class HomeFragment extends
         mLatestResponse = data;
         if (currentDate == startDate) {
             mAdapter.replaceAll(data.getStories());
-
+            initBanner();
         } else {
             mAdapter.addAll(data.getStories());
         }
