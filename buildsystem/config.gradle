@@ -60,7 +60,7 @@ ext {
             blockCanary: "com.github.moduth:blockcanary-no-op:${blockCanaryVersion}",
             leakCanary: "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
     ]
-    libMockito="org.mockito:mockito-core:1.+"
+    libMockito="org.mockito:mockito-core:2.0.70-beta"
     libZonedTime="com.jakewharton.threetenabp:threetenabp:1.0.3"
     libAutoValue="com.google.auto.value:auto-value:${autovalueVersion}"
     libAutoValueApt=libAutoValue

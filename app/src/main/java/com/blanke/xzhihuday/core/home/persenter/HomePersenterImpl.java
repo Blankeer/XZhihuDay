@@ -29,7 +29,7 @@ public class HomePersenterImpl extends HomePersenter {
     public void getLatestData(boolean isPull, Date date) {
         if (getView() != null) {
             getView().showLoading(isPull);
-            if (DateUtils.isSameDay(date, new Date())) {
+            if (DateUtils.isSameDay(date, DateUtils.nextDate(new Date()))) {
                 observer = mArticleDataFactory.getLatestNowData();
             } else {
                 observer = mArticleDataFactory.getLatestResponse(date);

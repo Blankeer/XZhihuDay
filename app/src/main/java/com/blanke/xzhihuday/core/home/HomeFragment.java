@@ -21,6 +21,7 @@ import com.blanke.xzhihuday.core.home.persenter.HomePersenter;
 import com.blanke.xzhihuday.core.home.persenter.HomePersenterImpl;
 import com.blanke.xzhihuday.core.home.view.HomeView;
 import com.blanke.xzhihuday.utils.DateUtils;
+import com.blanke.xzhihuday.view.ScrollLinearLayoutManager;
 import com.bumptech.glide.Glide;
 import com.neu.refresh.NeuSwipeRefreshLayout;
 import com.neu.refresh.NeuSwipeRefreshLayoutDirection;
@@ -76,8 +77,9 @@ public class HomeFragment extends
 
     @Override
     protected void initView() {
-        mHomeRecyclerview.setLayoutManager(new LinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false));
+        mHomeRecyclerview.setLayoutManager(new ScrollLinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false));
         mHomeRecyclerview.setItemAnimator(new FadeInAnimator());
+        mHomeRecyclerview.setNestedScrollingEnabled(false);
         mHomeSwipelayout.setDirection(NeuSwipeRefreshLayoutDirection.BOTH);
         mHomeSwipelayout.setOnRefreshListener(new NeuSwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -103,9 +105,6 @@ public class HomeFragment extends
                 .setPageIndicator(new int[]{R.drawable.ic_page_indicator, R.drawable.ic_page_indicator_focused})
                 //设置指示器的方向
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
-        //设置翻页的效果，不需要翻页效果可用不设
-        //.setPageTransformer(Transformer.DefaultTransformer);
-
     }
 
     public static class NetworkImageHolderView implements Holder<ArticleBean> {
