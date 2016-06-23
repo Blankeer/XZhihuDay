@@ -23,8 +23,6 @@ import com.blanke.xzhihuday.core.home.view.HomeView;
 import com.blanke.xzhihuday.utils.DateUtils;
 import com.blanke.xzhihuday.view.ScrollLinearLayoutManager;
 import com.bumptech.glide.Glide;
-import com.neu.refresh.NeuSwipeRefreshLayout;
-import com.neu.refresh.NeuSwipeRefreshLayoutDirection;
 import com.socks.library.KLog;
 
 import org.byteam.superadapter.SuperAdapter;
@@ -47,8 +45,8 @@ public class HomeFragment extends
         implements HomeView {
     @Bind(R.id.home_recyclerview)
     RecyclerView mHomeRecyclerview;
-    @Bind(R.id.home_swipelayout)
-    NeuSwipeRefreshLayout mHomeSwipelayout;
+//    @Bind(R.id.home_swipelayout)
+//    NeuSwipeRefreshLayout mHomeSwipelayout;
     @Bind(R.id.contentView)
     LinearLayout mContentView;
     @Bind(R.id.loadingView)
@@ -80,16 +78,17 @@ public class HomeFragment extends
         mHomeRecyclerview.setLayoutManager(new ScrollLinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false));
         mHomeRecyclerview.setItemAnimator(new FadeInAnimator());
         mHomeRecyclerview.setNestedScrollingEnabled(false);
-        mHomeSwipelayout.setDirection(NeuSwipeRefreshLayoutDirection.BOTH);
-        mHomeSwipelayout.setOnRefreshListener(new NeuSwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh(NeuSwipeRefreshLayoutDirection neuSwipeRefreshLayoutDirection) {
-                if (neuSwipeRefreshLayoutDirection == NeuSwipeRefreshLayoutDirection.TOP) {
-                    currentDate = startDate;
-                }
-                loadData(true);
-            }
-        });
+        mHomeRecyclerview.setHasFixedSize(false);
+//        mHomeSwipelayout.setDirection(NeuSwipeRefreshLayoutDirection.BOTH);
+//        mHomeSwipelayout.setOnRefreshListener(new NeuSwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh(NeuSwipeRefreshLayoutDirection neuSwipeRefreshLayoutDirection) {
+//                if (neuSwipeRefreshLayoutDirection == NeuSwipeRefreshLayoutDirection.TOP) {
+//                    currentDate = startDate;
+//                }
+//                loadData(true);
+//            }
+//        });
 
     }
 
@@ -191,7 +190,7 @@ public class HomeFragment extends
     }
 
     private void stopRefre() {
-        mHomeSwipelayout.setRefreshing(false);
+//        mHomeSwipelayout.setRefreshing(false);
     }
 
     @Override
