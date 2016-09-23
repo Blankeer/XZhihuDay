@@ -6,8 +6,8 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
@@ -21,9 +21,10 @@ import com.blanke.xzhihuday.core.home.persenter.HomePersenter;
 import com.blanke.xzhihuday.core.home.persenter.HomePersenterImpl;
 import com.blanke.xzhihuday.core.home.view.HomeView;
 import com.blanke.xzhihuday.utils.DateUtils;
-import com.blanke.xzhihuday.view.ScrollLinearLayoutManager;
 import com.bumptech.glide.Glide;
-import com.socks.library.KLog;
+import com.neu.refresh.NeuSwipeRefreshLayout;
+import com.neu.refresh.NeuSwipeRefreshLayoutDirection;
+import com.orhanobut.logger.Logger;
 
 import org.byteam.superadapter.SuperAdapter;
 import org.byteam.superadapter.internal.SuperViewHolder;
@@ -41,19 +42,16 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
  * Created by blanke on 16-6-6.
  */
 public class HomeFragment extends
-        BaseContentFragment<LinearLayout, LatestResponse, HomeView, HomePersenter>
+        BaseContentFragment<NeuSwipeRefreshLayout, LatestResponse, HomeView, HomePersenter>
         implements HomeView {
     @Bind(R.id.home_recyclerview)
     RecyclerView mHomeRecyclerview;
-//    @Bind(R.id.home_swipelayout)
-//    NeuSwipeRefreshLayout mHomeSwipelayout;
     @Bind(R.id.contentView)
-    LinearLayout mContentView;
+    NeuSwipeRefreshLayout mHomeSwipelayout;
     @Bind(R.id.loadingView)
     MaterialProgressBar mLoadingView;
     @Bind(R.id.errorView)
     TextView mErrorView;
-    @Bind(R.id.home_banner)
     ConvenientBanner mConvenientBanner;
 
     private Date currentDate, startDate;
@@ -75,21 +73,25 @@ public class HomeFragment extends
 
     @Override
     protected void initView() {
-        mHomeRecyclerview.setLayoutManager(new ScrollLinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false));
+//        mHomeRecyclerview.setLayoutManager(new ScrollLinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false));
+        mHomeRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         mHomeRecyclerview.setItemAnimator(new FadeInAnimator());
         mHomeRecyclerview.setNestedScrollingEnabled(false);
         mHomeRecyclerview.setHasFixedSize(false);
-//        mHomeSwipelayout.setDirection(NeuSwipeRefreshLayoutDirection.BOTH);
-//        mHomeSwipelayout.setOnRefreshListener(new NeuSwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh(NeuSwipeRefreshLayoutDirection neuSwipeRefreshLayoutDirection) {
-//                if (neuSwipeRefreshLayoutDirection == NeuSwipeRefreshLayoutDirection.TOP) {
-//                    currentDate = startDate;
-//                }
-//                loadData(true);
-//            }
-//        });
-
+        mHomeSwipelayout.setDirection(NeuSwipeRefreshLayoutDirection.BOTH);
+        mHomeSwipelayout.setOnRefreshListener(new NeuSwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh(NeuSwipeRefreshLayoutDirection neuSwipeRefreshLayoutDirection) {
+                if (neuSwipeRefreshLayoutDirection == NeuSwipeRefreshLayoutDirection.TOP) {
+                    currentDate = startDate;
+                }
+                loadData(true);
+            }
+        });
+        mConvenientBanner = new ConvenientBanner(getContext());
+        mConvenientBanner.setLayoutParams(new ViewGroup.LayoutParams
+                (ViewGroup.LayoutParams.MATCH_PARENT, 300));
+        mConvenientBanner.setCanLoop(true);
     }
 
     private void initBanner() {
@@ -135,6 +137,7 @@ public class HomeFragment extends
                         .into(iv);
             }
         };
+        mAdapter.addHeaderView(mConvenientBanner);
         mHomeRecyclerview.setAdapter(new SlideInBottomAnimationAdapter(mAdapter));
     }
 
@@ -150,7 +153,7 @@ public class HomeFragment extends
 
     @Override
     protected void lazyLoad() {
-        KLog.d();
+        Logger.d("");
         loadData(false);
     }
 

@@ -23,10 +23,10 @@ import com.blanke.xzhihuday.core.home.HomeFragment;
 import com.blanke.xzhihuday.core.main.di.DaggerMainComponent;
 import com.blanke.xzhihuday.core.main.di.MainComponent;
 import com.blanke.xzhihuday.repository.factory.ArticleDataFactory;
+import com.orhanobut.logger.Logger;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnSizeDeterminedListener;
 import com.roughike.bottombar.OnTabClickListener;
-import com.socks.library.KLog;
 
 import javax.inject.Inject;
 
@@ -63,7 +63,7 @@ public class MainActivity extends BaseActivity {
                 .subscribe(new Action1<ArticleBean>() {
                     @Override
                     public void call(ArticleBean articleBean) {
-                        KLog.d(articleBean);
+                        Logger.d(articleBean);
                     }
                 });
     }
