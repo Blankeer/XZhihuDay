@@ -1,8 +1,8 @@
-package com.blanke.xzhihuday.core.home.di;
+package com.blanke.xzhihuday.ui.home.di;
 
-import com.blanke.xzhihuday.app.di.scopes.PerActivity;
-import com.blanke.xzhihuday.core.home.HomeFragment;
-import com.blanke.xzhihuday.core.like.LikeFragment;
+import com.blanke.xzhihuday.di.scopes.PerActivity;
+import com.blanke.xzhihuday.ui.home.HomeFragment;
+import com.blanke.xzhihuday.ui.like.LikeFragment;
 
 import dagger.Subcomponent;
 

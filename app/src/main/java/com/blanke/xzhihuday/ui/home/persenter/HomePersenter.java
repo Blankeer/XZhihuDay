@@ -1,6 +1,6 @@
-package com.blanke.xzhihuday.core.home.persenter;
+package com.blanke.xzhihuday.ui.home.persenter;
 
-import com.blanke.xzhihuday.core.home.view.HomeView;
+import com.blanke.xzhihuday.ui.home.view.HomeView;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import java.util.Date;

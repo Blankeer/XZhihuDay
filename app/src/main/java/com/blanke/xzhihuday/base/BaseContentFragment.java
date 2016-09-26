@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 
-import com.blanke.xzhihuday.core.main.MainActivity;
+import com.blanke.xzhihuday.ui.main.MainActivity;
 import com.hannesdorfmann.mosby.mvp.MvpPresenter;
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 

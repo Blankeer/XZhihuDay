@@ -16,7 +16,6 @@ public class XApplication extends Application {
     public void onCreate() {
         super.onCreate();
         initAppComponent();
-        // test
     }
 
     private void initAppComponent() {

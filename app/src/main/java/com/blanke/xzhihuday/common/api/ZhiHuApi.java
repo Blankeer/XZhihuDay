@@ -1,7 +1,7 @@
-package com.blanke.xzhihuday.api;
+package com.blanke.xzhihuday.common.api;
 
 import com.blanke.xzhihuday.bean.ArticleBean;
-import com.blanke.xzhihuday.bean.LatestResponse;
+import com.blanke.xzhihuday.bean.http.LatestResponse;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;

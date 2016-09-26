@@ -1,4 +1,4 @@
-package com.blanke.xzhihuday.app.di.scopes;
+package com.blanke.xzhihuday.di.scopes;
 
 import javax.inject.Scope;
 

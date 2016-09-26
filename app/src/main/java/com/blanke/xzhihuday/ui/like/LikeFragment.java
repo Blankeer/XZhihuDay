@@ -1,4 +1,4 @@
-package com.blanke.xzhihuday.core.like;
+package com.blanke.xzhihuday.ui.like;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

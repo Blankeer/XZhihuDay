@@ -1,6 +1,6 @@
 package com.blanke.xzhihuday.app.di;
 
-import android.content.Context;
+import android.app.Application;
 
 import javax.inject.Singleton;
 
@@ -13,16 +13,16 @@ import dagger.Provides;
 @Module
 @Singleton
 public class AppModule {
-    private Context context;
+    private Application application;
 
-    public AppModule(Context context) {
-        this.context = context;
+    public AppModule(Application application) {
+        this.application = application;
     }
 
     @Singleton
     @Provides
-    public Context provideContext() {
-        return context;
+    public Application provideApplication() {
+        return application;
     }
 
 }

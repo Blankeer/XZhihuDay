@@ -1,6 +1,6 @@
-package com.blanke.xzhihuday.core.home.persenter;
+package com.blanke.xzhihuday.ui.home.persenter;
 
-import com.blanke.xzhihuday.bean.LatestResponse;
+import com.blanke.xzhihuday.bean.http.LatestResponse;
 import com.blanke.xzhihuday.repository.factory.ArticleDataFactory;
 import com.blanke.xzhihuday.utils.DateUtils;
 import com.orhanobut.logger.Logger;

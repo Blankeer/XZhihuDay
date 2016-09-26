@@ -1,4 +1,4 @@
-package com.blanke.xzhihuday.core.home;
+package com.blanke.xzhihuday.ui.home;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,10 +16,10 @@ import com.bigkoo.convenientbanner.holder.Holder;
 import com.blanke.xzhihuday.R;
 import com.blanke.xzhihuday.base.BaseContentFragment;
 import com.blanke.xzhihuday.bean.ArticleBean;
-import com.blanke.xzhihuday.bean.LatestResponse;
-import com.blanke.xzhihuday.core.home.persenter.HomePersenter;
-import com.blanke.xzhihuday.core.home.persenter.HomePersenterImpl;
-import com.blanke.xzhihuday.core.home.view.HomeView;
+import com.blanke.xzhihuday.bean.http.LatestResponse;
+import com.blanke.xzhihuday.ui.home.persenter.HomePersenter;
+import com.blanke.xzhihuday.ui.home.persenter.HomePersenterImpl;
+import com.blanke.xzhihuday.ui.home.view.HomeView;
 import com.blanke.xzhihuday.utils.DateUtils;
 import com.bumptech.glide.Glide;
 import com.neu.refresh.NeuSwipeRefreshLayout;

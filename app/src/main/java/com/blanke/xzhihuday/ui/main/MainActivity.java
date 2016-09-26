@@ -1,4 +1,4 @@
-package com.blanke.xzhihuday.core.main;
+package com.blanke.xzhihuday.ui.main;
 
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -19,9 +19,9 @@ import com.blanke.xzhihuday.base.BaseActivity;
 import com.blanke.xzhihuday.base.BaseContentFragment;
 import com.blanke.xzhihuday.bean.ArticleBean;
 import com.blanke.xzhihuday.config.ProjectConfig;
-import com.blanke.xzhihuday.core.home.HomeFragment;
-import com.blanke.xzhihuday.core.main.di.DaggerMainComponent;
-import com.blanke.xzhihuday.core.main.di.MainComponent;
+import com.blanke.xzhihuday.ui.home.HomeFragment;
+import com.blanke.xzhihuday.ui.main.di.DaggerMainComponent;
+import com.blanke.xzhihuday.ui.main.di.MainComponent;
 import com.blanke.xzhihuday.repository.factory.ArticleDataFactory;
 import com.orhanobut.logger.Logger;
 import com.roughike.bottombar.BottomBar;

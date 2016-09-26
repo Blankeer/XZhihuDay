@@ -1,7 +1,7 @@
 package com.blanke.xzhihuday.repository.factory;
 
 import com.blanke.xzhihuday.bean.ArticleBean;
-import com.blanke.xzhihuday.bean.LatestResponse;
+import com.blanke.xzhihuday.bean.http.LatestResponse;
 import com.blanke.xzhihuday.repository.base.ArticleRepository;
 import com.blanke.xzhihuday.repository.impl.network.NetworkArticleRepository;
 
@@ -21,9 +21,9 @@ public class ArticleDataFactory implements ArticleRepository {
 
     @Inject
     @Singleton
-    public ArticleDataFactory(NetworkArticleRepository mNetworkArticleRepository, Observable.Transformer mSchedulers) {
+    public ArticleDataFactory(NetworkArticleRepository mNetworkArticleRepository) {
         this.mNetworkArticleRepository = mNetworkArticleRepository;
-        this.mSchedulers = mSchedulers;
+//        this.mSchedulers = mSchedulers;
     }
 
     @Override

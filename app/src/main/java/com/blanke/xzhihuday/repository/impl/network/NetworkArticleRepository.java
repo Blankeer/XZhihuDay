@@ -1,8 +1,8 @@
 package com.blanke.xzhihuday.repository.impl.network;
 
-import com.blanke.xzhihuday.api.ZhiHuApi;
+import com.blanke.xzhihuday.common.api.ZhiHuApi;
 import com.blanke.xzhihuday.bean.ArticleBean;
-import com.blanke.xzhihuday.bean.LatestResponse;
+import com.blanke.xzhihuday.bean.http.LatestResponse;
 import com.blanke.xzhihuday.repository.base.ArticleRepository;
 import com.blanke.xzhihuday.utils.DateUtils;
 

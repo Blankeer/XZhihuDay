@@ -1,9 +1,9 @@
-package com.blanke.xzhihuday.core.main.di;
+package com.blanke.xzhihuday.ui.main.di;
 
 import com.blanke.xzhihuday.app.di.AppComponent;
-import com.blanke.xzhihuday.app.di.scopes.PerActivity;
-import com.blanke.xzhihuday.core.home.di.ContentComponent;
-import com.blanke.xzhihuday.core.main.MainActivity;
+import com.blanke.xzhihuday.di.scopes.PerActivity;
+import com.blanke.xzhihuday.ui.home.di.ContentComponent;
+import com.blanke.xzhihuday.ui.main.MainActivity;
 
 import dagger.Component;
 
