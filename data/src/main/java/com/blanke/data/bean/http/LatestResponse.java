@@ -1,6 +1,6 @@
-package com.blanke.xzhihuday.bean.http;
+package com.blanke.data.bean.http;
 
-import com.blanke.xzhihuday.bean.ArticleBean;
+import com.blanke.data.bean.ArticleBean;
 
 import java.util.Date;
 import java.util.List;

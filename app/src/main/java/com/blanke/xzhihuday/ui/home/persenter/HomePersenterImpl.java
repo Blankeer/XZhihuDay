@@ -1,7 +1,7 @@
 package com.blanke.xzhihuday.ui.home.persenter;
 
-import com.blanke.xzhihuday.bean.http.LatestResponse;
-import com.blanke.xzhihuday.repository.factory.ArticleDataFactory;
+import com.blanke.data.bean.http.LatestResponse;
+import com.blanke.data.repository.factory.ArticleDataFactory;
 import com.blanke.xzhihuday.utils.DateUtils;
 import com.orhanobut.logger.Logger;
 

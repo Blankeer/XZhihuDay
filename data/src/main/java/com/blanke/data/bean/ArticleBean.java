@@ -1,4 +1,4 @@
-package com.blanke.xzhihuday.bean;
+package com.blanke.data.bean;
 
 import java.util.List;
 

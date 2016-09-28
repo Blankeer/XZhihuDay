@@ -1,9 +1,9 @@
-package com.blanke.xzhihuday.repository.factory;
+package com.blanke.data.repository.factory;
 
-import com.blanke.xzhihuday.bean.ArticleBean;
-import com.blanke.xzhihuday.bean.http.LatestResponse;
-import com.blanke.xzhihuday.repository.base.ArticleRepository;
-import com.blanke.xzhihuday.repository.impl.network.NetworkArticleRepository;
+import com.blanke.data.bean.ArticleBean;
+import com.blanke.data.bean.http.LatestResponse;
+import com.blanke.data.repository.base.ArticleRepository;
+import com.blanke.data.repository.impl.network.NetworkArticleRepository;
 
 import java.util.Date;
 

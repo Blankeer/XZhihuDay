@@ -13,6 +13,7 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
@@ -43,14 +44,18 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile rootProject.ext.libSupportAnnotations
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+//    androidTestCompile 'com.android.support.test:runner:0.5'
+//    androidTestCompile 'com.android.support.test:rules:0.5'
+    testCompile rootProject.ext.libSupportAnnotations
     testCompile 'junit:junit:4.12'
-
+    compile project(':data')
     compile rootProject.ext.libSupportAppcompat
     compile rootProject.ext.libSupportDesign
     compile rootProject.ext.libSupportRecyclerview
     compile rootProject.ext.libSupportV4
     compile rootProject.ext.libSupportCardView
-    testCompile rootProject.ext.libSupportAnnotations
 
     compile rootProject.ext.libRxJava
     compile rootProject.ext.libRxAndroid
@@ -64,9 +69,6 @@ dependencies {
 
     testCompile rootProject.ext.libMockito
     compile rootProject.ext.libZonedTime
-
-    compile rootProject.ext.libRESTMock
-    testCompile rootProject.ext.libRobolectric
 
     compile rootProject.ext.libButterknife
 

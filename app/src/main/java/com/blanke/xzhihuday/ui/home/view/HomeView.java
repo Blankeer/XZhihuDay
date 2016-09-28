@@ -1,6 +1,6 @@
 package com.blanke.xzhihuday.ui.home.view;
 
-import com.blanke.xzhihuday.bean.http.LatestResponse;
+import com.blanke.data.bean.http.LatestResponse;
 import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 
 /**

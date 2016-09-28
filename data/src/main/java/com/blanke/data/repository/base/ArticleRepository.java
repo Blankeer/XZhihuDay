@@ -1,7 +1,8 @@
-package com.blanke.xzhihuday.repository.base;
+package com.blanke.data.repository.base;
 
-import com.blanke.xzhihuday.bean.ArticleBean;
-import com.blanke.xzhihuday.bean.http.LatestResponse;
+
+import com.blanke.data.bean.ArticleBean;
+import com.blanke.data.bean.http.LatestResponse;
 
 import java.util.Date;
 

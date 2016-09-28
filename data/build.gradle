@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+    lintOptions {
+        abortOnError rootProject.ext.abortOnLintError//lint错误
+        checkReleaseBuilds rootProject.ext.checkLintRelease
+        quiet true
+        ignoreWarnings true
+        disable 'InvalidPackage'
+        disable 'OldTargetApi'
+    }
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaVersion
+        targetCompatibility rootProject.ext.javaVersion
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile rootProject.ext.libSupportAnnotations
+    testCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+//    testCompile 'com.android.support.test:runner:0.5'
+//    testCompile 'com.android.support.test:rules:0.5'
+    testCompile rootProject.ext.libMockito
+    testCompile 'junit:junit:4.12'
+
+    compile rootProject.ext.libRxJava
+    compile rootProject.ext.libRxAndroid
+
+    compile rootProject.ext.libJavaXInject
+
+    compile rootProject.ext.libRetrofit
+    compile rootProject.ext.libRetrofitConverterGson
+    compile rootProject.ext.libRetrofitAdapterRxJava
+}

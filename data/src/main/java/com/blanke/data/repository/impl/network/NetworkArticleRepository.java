@@ -1,10 +1,11 @@
-package com.blanke.xzhihuday.repository.impl.network;
+package com.blanke.data.repository.impl.network;
 
-import com.blanke.xzhihuday.common.api.ZhiHuApi;
-import com.blanke.xzhihuday.bean.ArticleBean;
-import com.blanke.xzhihuday.bean.http.LatestResponse;
-import com.blanke.xzhihuday.repository.base.ArticleRepository;
-import com.blanke.xzhihuday.utils.DateUtils;
+import android.text.format.DateUtils;
+
+import com.blanke.data.api.ZhiHuApi;
+import com.blanke.data.bean.ArticleBean;
+import com.blanke.data.bean.http.LatestResponse;
+import com.blanke.data.repository.base.ArticleRepository;
 
 import java.util.Date;
 
