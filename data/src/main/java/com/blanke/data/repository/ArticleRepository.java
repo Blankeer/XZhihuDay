@@ -1,4 +1,4 @@
-package com.blanke.data.repository.base;
+package com.blanke.data.repository;
 
 
 import com.blanke.data.bean.ArticleBean;
@@ -11,7 +11,7 @@ import rx.Observable;
 /**
  * Created by blanke on 16-6-6.
  */
-public interface ArticleRepository {
+interface ArticleRepository {
     Observable<LatestResponse> getLatestNowData();
 
     Observable<ArticleBean> getArticle(int id);

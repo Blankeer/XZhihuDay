@@ -1,6 +1,6 @@
 package com.blanke.xzhihuday;
 
-import com.blanke.xzhihuday.utils.DateUtils;
+import com.blanke.data.utils.DateUtils;
 
 import org.junit.Test;
 

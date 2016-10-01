@@ -1,11 +1,10 @@
-package com.blanke.data.repository.impl.network;
+package com.blanke.data.repository;
 
-import android.text.format.DateUtils;
 
 import com.blanke.data.api.ZhiHuApi;
 import com.blanke.data.bean.ArticleBean;
 import com.blanke.data.bean.http.LatestResponse;
-import com.blanke.data.repository.base.ArticleRepository;
+import com.blanke.data.utils.DateUtils;
 
 import java.util.Date;
 
@@ -17,7 +16,7 @@ import rx.Observable;
 /**
  * Created by blanke on 16-6-6.
  */
-public class NetworkArticleRepository implements ArticleRepository {
+class NetworkArticleRepository implements ArticleRepository {
     private ZhiHuApi zhiHuApi;
 
     @Inject

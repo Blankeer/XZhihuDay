@@ -1,8 +1,9 @@
 package com.blanke.xzhihuday.app.di;
 
-import com.blanke.xzhihuday.common.api.ZhiHuApi;
-import com.blanke.xzhihuday.common.api.di.ApiModule;
-import com.blanke.xzhihuday.common.api.di.HttpModule;
+
+import com.blanke.data.api.ZhiHuApi;
+import com.blanke.data.module.ApiModule;
+import com.blanke.data.module.HttpModule;
 
 import javax.inject.Singleton;
 

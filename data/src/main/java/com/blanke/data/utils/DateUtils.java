@@ -1,5 +1,5 @@
 
-package com.blanke.xzhihuday.utils;
+package com.blanke.data.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

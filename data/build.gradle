@@ -45,6 +45,7 @@ dependencies {
 //    testCompile 'com.android.support.test:rules:0.5'
     testCompile rootProject.ext.libMockito
     testCompile 'junit:junit:4.12'
+//    androidTestCompile 'junit:junit:4.12'
 
     compile rootProject.ext.libRxJava
     compile rootProject.ext.libRxAndroid
@@ -54,4 +55,9 @@ dependencies {
     compile rootProject.ext.libRetrofit
     compile rootProject.ext.libRetrofitConverterGson
     compile rootProject.ext.libRetrofitAdapterRxJava
+
+
+    provided rootProject.ext.libJavaxAnnotation
+    compile rootProject.ext.libDagger
+    apt rootProject.ext.libDaggerCompiler
 }

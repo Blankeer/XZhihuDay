@@ -4,8 +4,8 @@ package com.blanke.xzhihuday.config;
  * Created by blanke on 16-5-27.
  */
 public class ProjectConfig {
-    private final static String BASE_URL = "http://news-at.zhihu.com/";
-    private final static String BASE_API_URL = BASE_URL + "api/4/";
+    public final static String BASE_URL = "http://news-at.zhihu.com/";
+    public final static String BASE_API_URL = BASE_URL + "api/4/";
     public static final int PAGE_SIZE = 15;
     private static String TEST_BASE_API_URL = null;
     public static final String DATE_FORMAT = "yyyyMMdd";

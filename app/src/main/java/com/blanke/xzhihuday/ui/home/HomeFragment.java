@@ -20,7 +20,7 @@ import com.blanke.data.bean.http.LatestResponse;
 import com.blanke.xzhihuday.ui.home.persenter.HomePersenter;
 import com.blanke.xzhihuday.ui.home.persenter.HomePersenterImpl;
 import com.blanke.xzhihuday.ui.home.view.HomeView;
-import com.blanke.xzhihuday.utils.DateUtils;
+import com.blanke.data.utils.DateUtils;
 import com.bumptech.glide.Glide;
 import com.neu.refresh.NeuSwipeRefreshLayout;
 import com.neu.refresh.NeuSwipeRefreshLayoutDirection;

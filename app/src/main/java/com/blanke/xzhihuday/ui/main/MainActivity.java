@@ -17,25 +17,17 @@ import com.blanke.xzhihuday.R;
 import com.blanke.xzhihuday.app.XApplication;
 import com.blanke.xzhihuday.base.BaseActivity;
 import com.blanke.xzhihuday.base.BaseContentFragment;
-import com.blanke.data.bean.ArticleBean;
 import com.blanke.xzhihuday.config.ProjectConfig;
 import com.blanke.xzhihuday.ui.home.HomeFragment;
 import com.blanke.xzhihuday.ui.main.di.DaggerMainComponent;
 import com.blanke.xzhihuday.ui.main.di.MainComponent;
-import com.blanke.data.repository.factory.ArticleDataFactory;
-import com.orhanobut.logger.Logger;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnSizeDeterminedListener;
 import com.roughike.bottombar.OnTabClickListener;
 
-import javax.inject.Inject;
-
 import butterknife.Bind;
-import rx.functions.Action1;
 
 public class MainActivity extends BaseActivity {
-    @Inject
-    ArticleDataFactory mArticleDataFactory;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.main_viewpager)
@@ -56,16 +48,6 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         initView(savedInstanceState);
         initDagger2();
-    }
-
-    private void test() {
-        mArticleDataFactory.getArticle(8387524)
-                .subscribe(new Action1<ArticleBean>() {
-                    @Override
-                    public void call(ArticleBean articleBean) {
-                        Logger.d(articleBean);
-                    }
-                });
     }
 
     private void initDagger2() {
