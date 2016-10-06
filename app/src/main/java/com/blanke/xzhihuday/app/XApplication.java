@@ -8,6 +8,8 @@ import com.blanke.xzhihuday.app.di.AppComponent;
 import com.blanke.xzhihuday.app.di.AppModule;
 import com.blanke.xzhihuday.app.di.DaggerAppComponent;
 import com.blanke.xzhihuday.config.ProjectConfig;
+import com.facebook.stetho.Stetho;
+import com.orhanobut.logger.Logger;
 
 /**
  * Created by blanke on 16-6-5.
@@ -18,7 +20,9 @@ public class XApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Stetho.initializeWithDefaults(this);
         initAppComponent();
+        Logger.init().methodCount(10);
     }
 
     private void initAppComponent() {
@@ -26,7 +30,9 @@ public class XApplication extends Application {
                 .builder()
                 .appModule(new AppModule(this))
                 .httpModule(new HttpModule.Buidler()
-                        .baseurl(ProjectConfig.BASE_API_URL).build())
+                        .baseurl(ProjectConfig.BASE_API_URL)
+                        .showLog(true)
+                        .build())
                 .apiModule(new ApiModule())
                 .build();
     }

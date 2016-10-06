@@ -2,8 +2,10 @@ package com.blanke.data.api;
 
 import com.blanke.data.bean.ArticleBean;
 import com.blanke.data.bean.http.LatestResponse;
+import com.blanke.data.module.HttpModule;
 
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import rx.Observable;
 
@@ -13,6 +15,7 @@ import rx.Observable;
 public interface ZhiHuApi {
 
     @GET("news/latest")
+    @Headers(HttpModule.TAG_CACHE_ONLINE_AGE + ":" + 60 * 60)
     Observable<LatestResponse> getLatestNowData();
 
     @GET("news/before/{date}")

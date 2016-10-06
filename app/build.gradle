@@ -95,4 +95,6 @@ dependencies {
     compile rootProject.ext.libGilde
     compile rootProject.ext.libBottomBar
     compile rootProject.ext.libBanner
+
+    compile 'com.facebook.stetho:stetho:1.4.1'
 }

@@ -13,18 +13,17 @@ import android.widget.TextView;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
-import com.blanke.xzhihuday.R;
-import com.blanke.xzhihuday.base.BaseContentFragment;
 import com.blanke.data.bean.ArticleBean;
 import com.blanke.data.bean.http.LatestResponse;
+import com.blanke.data.utils.DateUtils;
+import com.blanke.xzhihuday.R;
+import com.blanke.xzhihuday.base.BaseContentFragment;
 import com.blanke.xzhihuday.ui.home.persenter.HomePersenter;
 import com.blanke.xzhihuday.ui.home.persenter.HomePersenterImpl;
 import com.blanke.xzhihuday.ui.home.view.HomeView;
-import com.blanke.data.utils.DateUtils;
 import com.bumptech.glide.Glide;
 import com.neu.refresh.NeuSwipeRefreshLayout;
 import com.neu.refresh.NeuSwipeRefreshLayoutDirection;
-import com.orhanobut.logger.Logger;
 
 import org.byteam.superadapter.SuperAdapter;
 import org.byteam.superadapter.internal.SuperViewHolder;
@@ -153,7 +152,7 @@ public class HomeFragment extends
 
     @Override
     protected void lazyLoad() {
-        Logger.d("");
+//        Logger.d("");
         loadData(false);
     }
 

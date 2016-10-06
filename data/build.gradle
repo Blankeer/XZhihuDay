@@ -28,7 +28,9 @@ android {
         sourceCompatibility rootProject.ext.javaVersion
         targetCompatibility rootProject.ext.javaVersion
     }
-
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -60,4 +62,9 @@ dependencies {
     provided rootProject.ext.libJavaxAnnotation
     compile rootProject.ext.libDagger
     apt rootProject.ext.libDaggerCompiler
+
+    compile rootProject.ext.libLog
+
+    compile 'com.facebook.stetho:stetho-okhttp3:1.4.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
 }
