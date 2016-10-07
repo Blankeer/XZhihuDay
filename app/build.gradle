@@ -87,14 +87,15 @@ dependencies {
 
     compile rootProject.ext.libMaterialProgressbar
     compile rootProject.ext.libBaseAdapter
-    compile rootProject.ext.libAutoBundle
-    apt rootProject.ext.libAutoBundleAPT
+//    compile rootProject.ext.libAutoBundle
+//    apt rootProject.ext.libAutoBundleAPT
     compile rootProject.ext.libLog
-    compile rootProject.ext.libXSwipeRefreshLayout
+//    compile rootProject.ext.libXSwipeRefreshLayout
     compile rootProject.ext.libRecyclerAnim
     compile rootProject.ext.libGilde
     compile rootProject.ext.libBottomBar
     compile rootProject.ext.libBanner
 
     compile 'com.facebook.stetho:stetho:1.4.1'
+    compile 'com.github.markomilos:paginate:0.5.1'
 }

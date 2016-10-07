@@ -3,6 +3,7 @@ package com.blanke.xzhihuday.ui.home;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -22,11 +23,9 @@ import com.blanke.xzhihuday.ui.home.persenter.HomePersenter;
 import com.blanke.xzhihuday.ui.home.persenter.HomePersenterImpl;
 import com.blanke.xzhihuday.ui.home.view.HomeView;
 import com.bumptech.glide.Glide;
-import com.neu.refresh.NeuSwipeRefreshLayout;
-import com.neu.refresh.NeuSwipeRefreshLayoutDirection;
-
-import org.byteam.superadapter.SuperAdapter;
-import org.byteam.superadapter.internal.SuperViewHolder;
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
+import com.paginate.Paginate;
 
 import java.util.Date;
 
@@ -34,19 +33,18 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import jp.wasabeef.recyclerview.adapters.SlideInBottomAnimationAdapter;
-import jp.wasabeef.recyclerview.animators.FadeInAnimator;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 /**
  * Created by blanke on 16-6-6.
  */
 public class HomeFragment extends
-        BaseContentFragment<NeuSwipeRefreshLayout, LatestResponse, HomeView, HomePersenter>
+        BaseContentFragment<SwipeRefreshLayout, LatestResponse, HomeView, HomePersenter>
         implements HomeView {
     @Bind(R.id.home_recyclerview)
     RecyclerView mHomeRecyclerview;
     @Bind(R.id.contentView)
-    NeuSwipeRefreshLayout mHomeSwipelayout;
+    SwipeRefreshLayout mHomeSwipelayout;
     @Bind(R.id.loadingView)
     MaterialProgressBar mLoadingView;
     @Bind(R.id.errorView)
@@ -54,7 +52,7 @@ public class HomeFragment extends
     ConvenientBanner mConvenientBanner;
 
     private Date currentDate, startDate;
-    private SuperAdapter<ArticleBean> mAdapter;
+    private BaseQuickAdapter<ArticleBean> mAdapter;
     @Inject
     HomePersenterImpl mHomePersenter;
     private LatestResponse mLatestResponse;
@@ -74,19 +72,20 @@ public class HomeFragment extends
     protected void initView() {
 //        mHomeRecyclerview.setLayoutManager(new ScrollLinearLayoutManager(mainActivity, LinearLayoutManager.VERTICAL, false));
         mHomeRecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mHomeRecyclerview.setItemAnimator(new FadeInAnimator());
+//        mHomeRecyclerview.setItemAnimator(new FadeInAnimator());
         mHomeRecyclerview.setNestedScrollingEnabled(false);
         mHomeRecyclerview.setHasFixedSize(false);
-        mHomeSwipelayout.setDirection(NeuSwipeRefreshLayoutDirection.BOTH);
-        mHomeSwipelayout.setOnRefreshListener(new NeuSwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh(NeuSwipeRefreshLayoutDirection neuSwipeRefreshLayoutDirection) {
-                if (neuSwipeRefreshLayoutDirection == NeuSwipeRefreshLayoutDirection.TOP) {
-                    currentDate = startDate;
-                }
-                loadData(true);
-            }
-        });
+//        mHomeSwipelayout.setDirection(SwipeRefreshLayoutDirection.BOTH);
+//        mHomeSwipelayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh(SwipeRefreshLayoutDirection SwipeRefreshLayoutDirection) {
+//                if (SwipeRefreshLayoutDirection == SwipeRefreshLayoutDirection.TOP) {
+//                    currentDate = startDate;
+//                }
+//                loadData(true);
+//            }
+//        });
+
         mConvenientBanner = new ConvenientBanner(getContext());
         mConvenientBanner.setLayoutParams(new ViewGroup.LayoutParams
                 (ViewGroup.LayoutParams.MATCH_PARENT, 300));
@@ -126,9 +125,9 @@ public class HomeFragment extends
     @Override
     protected void initData() {
         startDate = currentDate = DateUtils.nextDate(new Date());
-        mAdapter = new SuperAdapter<ArticleBean>(mainActivity, null, R.layout.item_article) {
+        mAdapter = new BaseQuickAdapter<ArticleBean>(R.layout.item_article, null) {
             @Override
-            public void onBind(SuperViewHolder holder, int viewType, int layoutPosition, ArticleBean item) {
+            protected void convert(BaseViewHolder holder, ArticleBean item) {
                 holder.setText(R.id.item_article_title, item.getTitle());
                 ImageView iv = holder.getView(R.id.item_img);
                 Glide.with(mainActivity)
@@ -136,8 +135,29 @@ public class HomeFragment extends
                         .into(iv);
             }
         };
+//        mAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         mAdapter.addHeaderView(mConvenientBanner);
         mHomeRecyclerview.setAdapter(new SlideInBottomAnimationAdapter(mAdapter));
+        Paginate.Callbacks callbacks=new Paginate.Callbacks() {
+            @Override
+            public void onLoadMore() {
+
+            }
+
+            @Override
+            public boolean isLoading() {
+                return false;
+            }
+
+            @Override
+            public boolean hasLoadedAllItems() {
+                return false;
+            }
+        };
+//        Paginate.with(mHomeRecyclerview, callbacks)
+//                .setLoadingTriggerThreshold(2)
+//                .addLoadingListItem(true)
+//                .build();
     }
 
     private void lastDate() {
@@ -171,7 +191,6 @@ public class HomeFragment extends
 
     }
 
-
     @Override
     public HomePersenter createPresenter() {
         return mHomePersenter;
@@ -181,10 +200,10 @@ public class HomeFragment extends
     public void setData(LatestResponse data) {
         mLatestResponse = data;
         if (currentDate == startDate) {
-            mAdapter.replaceAll(data.getStories());
+            mAdapter.setNewData(data.getStories());
             initBanner();
         } else {
-            mAdapter.addAll(data.getStories());
+            mAdapter.addData(data.getStories());
         }
         setFirstFinish();
         lastDate();

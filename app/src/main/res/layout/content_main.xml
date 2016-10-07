@@ -18,4 +18,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/main_bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        app:bb_tabXmlResource="@xml/main_bottombar_menu" />
+
 </LinearLayout>

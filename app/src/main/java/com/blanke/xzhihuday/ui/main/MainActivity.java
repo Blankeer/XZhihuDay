@@ -5,13 +5,11 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.blanke.xzhihuday.R;
 import com.blanke.xzhihuday.app.XApplication;
@@ -22,8 +20,7 @@ import com.blanke.xzhihuday.ui.home.HomeFragment;
 import com.blanke.xzhihuday.ui.main.di.DaggerMainComponent;
 import com.blanke.xzhihuday.ui.main.di.MainComponent;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.OnSizeDeterminedListener;
-import com.roughike.bottombar.OnTabClickListener;
+import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.Bind;
 
@@ -36,8 +33,9 @@ public class MainActivity extends BaseActivity {
     CoordinatorLayout mCoordinatorLayout;
     @Bind(R.id.fab)
     FloatingActionButton fab;
+    @Bind(R.id.main_bottomBar)
+    BottomBar mBottomBar;
 
-    private BottomBar mBottomBar;
     private int tabSize = ProjectConfig.TAB_SIZE;
     private BaseContentFragment[] baseContentFragments;
     private MainComponent mainComponent;
@@ -79,9 +77,9 @@ public class MainActivity extends BaseActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
-                mBottomBar.selectTabAtPosition(position, true);
+                mBottomBar.selectTabAtPosition(position);
                 BaseContentFragment fragment = baseContentFragments[position];
-                fragment.initFab(fab);
+//                fragment.initFab(fab);
 
             }
         });
@@ -114,31 +112,28 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initBottomBar(Bundle savedInstanceState) {
-        mBottomBar = BottomBar.attachShy(mCoordinatorLayout, mViewPager, savedInstanceState);
-//        mBottomBar=BottomBar.attach(this,savedInstanceState);
-        mBottomBar.setItems(R.menu.main_bottombar_menu);
-        mBottomBar.setOnTabClickListener(new OnTabClickListener() {
+        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(int position) {
                 mViewPager.setCurrentItem(position);
             }
 
-            @Override
-            public void onTabReSelected(int position) {
-                baseContentFragments[position].doubleClickTab();
-            }
+//            @Override
+//            public void onTabReSelected(int position) {
+//                baseContentFragments[position].doubleClickTab();
+//            }
         });
-        mBottomBar.mapColorForTab(0, ContextCompat.getColor(this, R.color.colorAccent));
-        mBottomBar.mapColorForTab(1, 0xFF5D4037);
-        mBottomBar.mapColorForTab(2, "#7B1FA2");
-        mBottomBar.mapColorForTab(3, "#FF9800");
-        mBottomBar.getBarSize(new OnSizeDeterminedListener() {
-            @Override
-            public void onSizeReady(int size) {
-                ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) fab.getLayoutParams();
-                lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, size + 16);
-            }
-        });
+//        mBottomBar.mapColorForTab(0, ContextCompat.getColor(this, R.color.colorAccent));
+//        mBottomBar.mapColorForTab(1, 0xFF5D4037);
+//        mBottomBar.mapColorForTab(2, "#7B1FA2");
+//        mBottomBar.mapColorForTab(3, "#FF9800");
+//        mBottomBar.getBarSize(new OnSizeDeterminedListener() {
+//            @Override
+//            public void onSizeReady(int size) {
+//                ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) fab.getLayoutParams();
+//                lp.setMargins(lp.leftMargin, lp.topMargin, lp.rightMargin, size + 16);
+//            }
+//        });
     }
 
     /**
@@ -169,7 +164,8 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mBottomBar.onSaveInstanceState(outState);
+        mBottomBar.onSaveInstanceState();
+//        mBottomBar.onSaveInstanceState(outState);
     }
 
     @Override
@@ -196,13 +192,13 @@ public class MainActivity extends BaseActivity {
 
     public void showTab() {
         if (mBottomBar != null) {
-            mBottomBar.show();
+//            mBottomBar.show
         }
     }
 
     public void hideTab() {
         if (mBottomBar != null) {
-            mBottomBar.hide();
+//            mBottomBar.hide();
         }
     }
 
