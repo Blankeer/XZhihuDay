@@ -6,7 +6,6 @@ import android.text.TextUtils;
 import com.blanke.data.utils.NetWorkUtils;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
-import com.orhanobut.logger.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,26 +61,26 @@ public class HttpModule {
                     offAge = Integer.parseInt(offAgeStr);
                 } catch (Exception e) {
                 }
-                request = request.newBuilder()
-                        .removeHeader(TAG_CACHE_OFFLINE_AGE)
-                        .build();
+//                request = request.newBuilder()
+//                        .removeHeader(TAG_CACHE_OFFLINE_AGE)
+//                        .build();
             }
             if (!TextUtils.isEmpty(onAgeStr)) {
                 try {
                     onAge = Integer.parseInt(onAgeStr);
                 } catch (Exception e) {
                 }
-                request = request.newBuilder()
-                        .removeHeader(TAG_CACHE_ONLINE_AGE)
-                        .build();
+//                request = request.newBuilder()
+//                        .removeHeader(TAG_CACHE_ONLINE_AGE)
+//                        .build();
             }
             Response response = chain.proceed(request);
-            response = response.newBuilder().removeHeader("Etag").build();
+//            response = response.newBuilder().removeHeader("Etag").build();
             boolean isNetwork = NetWorkUtils.checkNet(application);
-            Logger.e("cache :" + offAgeStr + "," + onAgeStr + "," + isNetwork);
+//            Logger.e("cache :" + offAgeStr + "," + onAgeStr + "," + isNetwork);
             if (isNetwork) {
                 if (onAge > 0) {//单位是秒
-                    return response.newBuilder()
+                    response = response.newBuilder()
                             .removeHeader("Pragma")
                             .removeHeader("Cache-Control")
                             .header("Cache-Control", "public, max-age=" + onAge)
@@ -89,7 +88,7 @@ public class HttpModule {
                 }
             } else {
                 if (offAge > 0) {
-                    return response.newBuilder()
+                    response = response.newBuilder()
                             .removeHeader("Pragma")
                             .removeHeader("Cache-Control")
                             .header("Cache-Control", "public, only-if-cached, max-stale=" + offAge)
