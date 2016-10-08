@@ -79,7 +79,7 @@ public class MainActivity extends BaseActivity {
             public void onPageSelected(int position) {
                 mBottomBar.selectTabAtPosition(position);
                 BaseContentFragment fragment = baseContentFragments[position];
-//                fragment.initFab(fab);
+                fragment.initFab(fab);
 
             }
         });
@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity {
                 getCurrentFragment().clickFab(fab);
             }
         });
-        initBottomBar(savedInstanceState);
+//        initBottomBar(savedInstanceState);
     }
 
     //获得当前选中的fragment
