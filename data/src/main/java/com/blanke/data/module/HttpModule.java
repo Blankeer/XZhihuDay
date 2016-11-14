@@ -23,7 +23,6 @@ import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
@@ -45,57 +44,48 @@ public class HttpModule {
     private Application application;
     private Interceptor cacheInterceptor = new Interceptor() {
         @Override
-        public Response intercept(Chain chain) throws IOException {
+        public okhttp3.Response intercept(Chain chain) throws IOException {
             Request request = chain.request();
-            if (!NetWorkUtils.checkNet(application)) {//没网强制从缓存读取(必须得写，不然断网状态下，退出应用，或者等待一分钟后，就获取不到缓存）
-                request = request.newBuilder()
-                        .cacheControl(CacheControl.FORCE_CACHE)
-                        .build();
-            }
             //通过cache head设置相应的缓存设置,设置完后删除相应的head
             String offAgeStr = request.header(TAG_CACHE_OFFLINE_AGE);
             String onAgeStr = request.header(TAG_CACHE_ONLINE_AGE);
+//            Logger.e("cacheInterceptor :intercept(),net=" + isEnableNetWork()
+//                    + "\n\t 离线缓存时间=" + offAgeStr + ",在线缓存时间=" + onAgeStr);
             int offAge = 0, onAge = 0;
             if (!TextUtils.isEmpty(offAgeStr)) {
                 try {
                     offAge = Integer.parseInt(offAgeStr);
                 } catch (Exception e) {
+                    offAge = 0;
                 }
-//                request = request.newBuilder()
-//                        .removeHeader(TAG_CACHE_OFFLINE_AGE)
-//                        .build();
             }
             if (!TextUtils.isEmpty(onAgeStr)) {
                 try {
                     onAge = Integer.parseInt(onAgeStr);
                 } catch (Exception e) {
+                    onAge = 0;
                 }
-//                request = request.newBuilder()
-//                        .removeHeader(TAG_CACHE_ONLINE_AGE)
-//                        .build();
             }
-            Response response = chain.proceed(request);
-//            response = response.newBuilder().removeHeader("Etag").build();
-            boolean isNetwork = NetWorkUtils.checkNet(application);
-//            Logger.e("cache :" + offAgeStr + "," + onAgeStr + "," + isNetwork);
-            if (isNetwork) {
-                if (onAge > 0) {//单位是秒
-                    response = response.newBuilder()
-                            .removeHeader("Pragma")
-                            .removeHeader("Cache-Control")
-                            .header("Cache-Control", "public, max-age=" + onAge)
-                            .build();
-                }
-            } else {
-                if (offAge > 0) {
-                    response = response.newBuilder()
-                            .removeHeader("Pragma")
-                            .removeHeader("Cache-Control")
-                            .header("Cache-Control", "public, only-if-cached, max-stale=" + offAge)
-                            .build();
-                }
+            if (offAge > 0 && !isEnableNetWork()) {//没网强制从缓存读取(必须得写，不然断网状态下，退出应用，或者等待一分钟后，就获取不到缓存）
+                request = request.newBuilder()
+                        .cacheControl(new CacheControl.Builder().onlyIfCached()
+                                .maxStale(offAge, TimeUnit.SECONDS).build())
+                        .build();
+            }
+            okhttp3.Response response = chain.proceed(request);
+            if (onAge > 0 && isEnableNetWork()) {
+                response = response.newBuilder()
+                        .removeHeader("Pragma")
+                        .removeHeader("Etag")
+                        .removeHeader("Cache-Control")
+                        .header("Cache-Control", "public, max-age=" + onAge)
+                        .build();
             }
             return response;
+        }
+
+        private boolean isEnableNetWork() {
+            return NetWorkUtils.checkNet(application);
         }
     };
 

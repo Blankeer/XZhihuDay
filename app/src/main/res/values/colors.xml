@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="card_background">#fff</color>
+
+    <color name="bottomChecked">@color/colorAccent</color>
+    <color name="bottomUnChecked">#757575</color>
+
 </resources>

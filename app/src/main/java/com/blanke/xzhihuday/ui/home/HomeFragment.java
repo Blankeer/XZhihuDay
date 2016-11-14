@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -87,8 +88,10 @@ public class HomeFragment extends
 //        });
 
         mConvenientBanner = new ConvenientBanner(getContext());
-        mConvenientBanner.setLayoutParams(new ViewGroup.LayoutParams
-                (ViewGroup.LayoutParams.MATCH_PARENT, 300));
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams
+                (ViewGroup.LayoutParams.MATCH_PARENT, 700);
+//        params.setMargins(5, 5, 5, 5);
+        mConvenientBanner.setLayoutParams(params);
         mConvenientBanner.setCanLoop(true);
     }
 
@@ -138,7 +141,7 @@ public class HomeFragment extends
 //        mAdapter.openLoadAnimation(BaseQuickAdapter.SCALEIN);
         mAdapter.addHeaderView(mConvenientBanner);
         mHomeRecyclerview.setAdapter(new SlideInBottomAnimationAdapter(mAdapter));
-        Paginate.Callbacks callbacks=new Paginate.Callbacks() {
+        Paginate.Callbacks callbacks = new Paginate.Callbacks() {
             @Override
             public void onLoadMore() {
 
