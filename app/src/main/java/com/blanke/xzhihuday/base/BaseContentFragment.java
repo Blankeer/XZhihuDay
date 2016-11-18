@@ -11,7 +11,8 @@ import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 /**
  * Created by blanke on 16-6-6.
  */
-public abstract class BaseContentFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>> extends BaseMvpLceFragment<CV, M, V, P> {
+public abstract class BaseContentFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
+        extends BaseMvpLceFragment<CV, M, V, P> {
     protected MainActivity mainActivity;
     protected boolean isFirstFinish = false;
     private boolean isStart = false;

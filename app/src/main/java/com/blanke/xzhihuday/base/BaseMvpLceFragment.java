@@ -15,7 +15,8 @@ import butterknife.ButterKnife;
 /**
  * Created by Blanke on 16-1-7.
  */
-public abstract class BaseMvpLceFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>> extends MvpLceFragment<CV, M, V, P> {
+public abstract class BaseMvpLceFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
+        extends MvpLceFragment<CV, M, V, P> {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         setRetainInstance(true);

@@ -1,11 +1,12 @@
 package com.blanke.data.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by blanke on 16-6-1.
  */
-public class ArticleBean {
+public class ArticleBean implements Serializable {
 
     /**
      * image_source : 《豪斯医生》
@@ -136,7 +137,7 @@ public class ArticleBean {
         this.css = css;
     }
 
-    public static class SectionBean {
+    public static class SectionBean implements Serializable {
         private String thumbnail;
         private int id;
         private String name;

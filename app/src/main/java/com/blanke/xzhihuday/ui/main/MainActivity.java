@@ -1,6 +1,7 @@
 package com.blanke.xzhihuday.ui.main;
 
 import android.os.Bundle;
+import android.support.design.internal.BottomNavigationMenuView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -12,9 +13,9 @@ import android.support.v7.widget.Toolbar;
 import com.blanke.xzhihuday.R;
 import com.blanke.xzhihuday.app.XApplication;
 import com.blanke.xzhihuday.base.BaseActivity;
-import com.blanke.xzhihuday.base.BaseContentFragment;
 import com.blanke.xzhihuday.config.ProjectConfig;
 import com.blanke.xzhihuday.ui.home.HomeFragment;
+import com.blanke.xzhihuday.ui.like.LikeFragment;
 import com.blanke.xzhihuday.ui.main.di.DaggerMainComponent;
 import com.blanke.xzhihuday.ui.main.di.MainComponent;
 
@@ -33,7 +34,7 @@ public class MainActivity extends BaseActivity {
     BottomNavigationView mBottomBar;
 
     private int tabSize = ProjectConfig.TAB_SIZE;
-    private BaseContentFragment[] baseContentFragments;
+    private Fragment[] baseContentFragments;
     private MainComponent mainComponent;
 
     @Override
@@ -54,7 +55,7 @@ public class MainActivity extends BaseActivity {
 
     private void initView() {
         setSupportActionBar(toolbar);
-        baseContentFragments = new BaseContentFragment[tabSize];
+        baseContentFragments = new Fragment[tabSize];
         mViewPager.setOffscreenPageLimit(tabSize);
         mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -71,25 +72,23 @@ public class MainActivity extends BaseActivity {
             }
         });
         mViewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+
             @Override
             public void onPageSelected(int position) {
-                for (int i = 0; i < baseContentFragments.length; i++) {
-                    if (i != position) {
-                        mBottomBar.getMenu().getItem(i).setChecked(false);
-                    }
-                }
-                mBottomBar.getMenu().getItem(position).setChecked(true);
-                BaseContentFragment fragment = baseContentFragments[position];
-                fragment.initFab(fab);
+                BottomNavigationMenuView bmv = (BottomNavigationMenuView) mBottomBar.getChildAt(0);
+                bmv.getChildAt(position).performClick();
+//                BaseContentFragment fragment = baseContentFragments[position];
+//                fragment.initFab(fab);
+//                lastPosition = position;
             }
         });
 //        mViewPager.setOnTouchListener((v, event) -> true);
-        fab.setOnClickListener(v -> getCurrentFragment().clickFab(fab));
+//        fab.setOnClickListener(v -> getCurrentFragment().clickFab(fab));
         initBottomBar();
     }
 
     //获得当前选中的fragment
-    private BaseContentFragment getCurrentFragment() {
+    private Fragment getCurrentFragment() {
         return baseContentFragments[mViewPager.getCurrentItem()];
     }
 
@@ -99,18 +98,18 @@ public class MainActivity extends BaseActivity {
      * @param position
      * @return
      */
-    private BaseContentFragment newFragment(int position) {
+    private Fragment newFragment(int position) {
         switch (position) {
             case 0:
                 return new HomeFragment();
         }
-        return new HomeFragment();
+        return new LikeFragment();
     }
 
     private void initBottomBar() {
         mBottomBar.setOnNavigationItemSelectedListener(item -> {
             mViewPager.setCurrentItem(getTabIndex(item.getItemId()));
-            return false;
+            return true;
         });
     }
 

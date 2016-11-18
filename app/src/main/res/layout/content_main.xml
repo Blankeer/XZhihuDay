@@ -5,29 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior"
     tools:context=".ui.main.MainActivity"
     tools:showIn="@layout/activity_main">
 
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/main_bottomBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:itemIconTint="@drawable/bottom_navigation_color_selector"
-        app:itemTextColor="@drawable/bottom_navigation_color_selector"
-        app:menu="@menu/main_bottombar_menu" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/main_viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/main_bottomBar" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="8dp"
-        android:layout_above="@id/main_bottomBar"
         android:background="@drawable/shadow" />
 </RelativeLayout>

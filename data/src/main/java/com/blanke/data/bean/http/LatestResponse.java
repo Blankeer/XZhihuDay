@@ -2,13 +2,14 @@ package com.blanke.data.bean.http;
 
 import com.blanke.data.bean.ArticleBean;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by blanke on 16-6-1.
  */
-public class LatestResponse {
+public class LatestResponse implements Serializable{
 
     /**
      * date : 20160601

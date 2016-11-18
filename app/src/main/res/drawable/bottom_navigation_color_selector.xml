@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@color/bottomChecked" android:state_checked="true" />
-    <item android:drawable="@color/bottomUnChecked" android:state_checked="false" />
+    <item android:color="@color/bottomChecked" android:state_checked="true" />
+    <item android:color="@color/bottomUnChecked" android:state_checked="false" />
 </selector>

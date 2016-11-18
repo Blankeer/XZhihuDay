@@ -3,7 +3,6 @@ package com.blanke.xzhihuday.ui.home.persenter;
 import com.blanke.data.bean.http.LatestResponse;
 import com.blanke.data.repository.ArticleDataManager;
 import com.blanke.data.utils.DateUtils;
-import com.orhanobut.logger.Logger;
 
 import java.util.Date;
 
@@ -34,7 +33,7 @@ public class HomePersenterImpl extends HomePersenter {
             }
             observer.filter(latestResponse -> getView() != null)
                     .subscribe(latestResponse -> {
-                        Logger.d(latestResponse);
+//                        Logger.d(latestResponse);
                         getView().setData(latestResponse);
                         getView().showContent();
                     }, throwable -> {
