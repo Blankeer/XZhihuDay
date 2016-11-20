@@ -85,7 +85,7 @@ public class HomeFrameLayout
         initData();
     }
 
-    protected void initView() {
+    private void initView() {
         initBanner();
         initRecyclerView();
         mHomeSwipelayout.setOnRefreshListener(() -> {
@@ -148,7 +148,7 @@ public class HomeFrameLayout
                 .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.ALIGN_PARENT_RIGHT);
     }
 
-    protected void initData() {
+    private void initData() {
         startDate = currentDate = DateUtils.nextDate(new Date());
     }
 
@@ -170,7 +170,7 @@ public class HomeFrameLayout
 
     @Override
     protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
-        return "error";
+        return "加载错误,点击重试";
     }
 
     @Override

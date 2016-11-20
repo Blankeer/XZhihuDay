@@ -1,10 +1,9 @@
 package com.blanke.xzhihuday.base;
 
-import android.support.v7.app.AppCompatActivity;
-
 import butterknife.ButterKnife;
+import me.yokeyword.fragmentation.SupportActivity;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends SupportActivity {
 
 
     @Override

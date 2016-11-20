@@ -1,37 +1,35 @@
 package com.blanke.xzhihuday.base;
 
-import android.app.Activity;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.view.View;
 
 import com.blanke.xzhihuday.ui.main.MainActivity;
-import com.hannesdorfmann.mosby.mvp.MvpPresenter;
-import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 
 /**
  * Created by blanke on 16-6-6.
+ * 加入viewpager fragment的懒加载
  */
-public abstract class BaseContentFragment<CV extends View, M, V extends MvpLceView<M>, P extends MvpPresenter<V>>
-        extends BaseMvpLceFragment<CV, M, V, P> {
-    protected MainActivity mainActivity;
-    protected boolean isFirstFinish = false;
-    private boolean isStart = false;
+public abstract class BaseContentFragment extends BaseFragment {
+    private boolean isCreate = false;
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        mainActivity = (MainActivity) activity;
+    protected MainActivity getMainActivity() {
+        if (_mActivity != null) {
+            return (MainActivity) _mActivity;
+        }
+        return null;
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        isStart = true;
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        isCreate = true;
         onLazyLoad();
+
     }
 
     private void onLazyLoad() {
-        if (getUserVisibleHint() && !isFirstFinish && isStart) {
+        if (getUserVisibleHint() && isCreate) {
             lazyLoad();
         }
     }
@@ -45,13 +43,6 @@ public abstract class BaseContentFragment<CV extends View, M, V extends MvpLceVi
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         onLazyLoad();
-    }
-
-    /**
-     * 可见懒加载，第一次完成，之后再切换不会触发事件
-     */
-    public void setFirstFinish() {
-        isFirstFinish = true;
     }
 
     //  可见才加载

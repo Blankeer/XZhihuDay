@@ -15,7 +15,6 @@ import com.blanke.xzhihuday.app.XApplication;
 import com.blanke.xzhihuday.base.BaseActivity;
 import com.blanke.xzhihuday.config.ProjectConfig;
 import com.blanke.xzhihuday.ui.home.HomeFragment;
-import com.blanke.xzhihuday.ui.like.LikeFragment;
 import com.blanke.xzhihuday.ui.main.di.DaggerMainComponent;
 import com.blanke.xzhihuday.ui.main.di.MainComponent;
 
@@ -103,7 +102,8 @@ public class MainActivity extends BaseActivity {
             case 0:
                 return new HomeFragment();
         }
-        return new LikeFragment();
+        return new HomeFragment();
+//        return new LikeFragment();
     }
 
     private void initBottomBar() {

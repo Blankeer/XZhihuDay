@@ -2,15 +2,15 @@ package com.blanke.xzhihuday.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.View;
 
 import butterknife.ButterKnife;
+import me.yokeyword.fragmentation.SupportFragment;
 
 /**
  * Created by blanke on 16-5-30.
  */
-public class BaseFragment extends Fragment {
+public class BaseFragment extends SupportFragment {
 
 
     @Override
