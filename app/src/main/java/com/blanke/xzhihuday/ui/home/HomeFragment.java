@@ -36,6 +36,11 @@ public class HomeFragment extends BaseContentFragment {
         initDagger2();
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
     private void initDagger2() {
         if (getMainActivity() != null) {
             getMainActivity().getMainComponent()
@@ -44,7 +49,7 @@ public class HomeFragment extends BaseContentFragment {
     }
 
     @Override
-    protected void lazyLoad() {
+    protected void lazyLoad(Bundle savedInstanceState) {
         if (mHomeFrameLayout == null) {
             mHomeFrameLayout = (HomeFrameLayout) View
                     .inflate(getMainActivity(), R.layout.view_lce_datalist, null);

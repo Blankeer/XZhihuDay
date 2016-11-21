@@ -16,6 +16,7 @@ public class BaseFragment extends SupportFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+//        setRetainInstance(true);
         ButterKnife.bind(this, view);
     }
 

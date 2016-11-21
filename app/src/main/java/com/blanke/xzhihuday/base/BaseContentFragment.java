@@ -12,6 +12,7 @@ import com.blanke.xzhihuday.ui.main.MainActivity;
  */
 public abstract class BaseContentFragment extends BaseFragment {
     private boolean isCreate = false;
+    private Bundle mSavedInstanceState;
 
     protected MainActivity getMainActivity() {
         if (_mActivity != null) {
@@ -23,14 +24,15 @@ public abstract class BaseContentFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        mSavedInstanceState = savedInstanceState;
+        setRetainInstance(true);
         isCreate = true;
-        onLazyLoad();
-
+        onLazyLoad(savedInstanceState);
     }
 
-    private void onLazyLoad() {
+    private void onLazyLoad(Bundle savedInstanceState) {
         if (getUserVisibleHint() && isCreate) {
-            lazyLoad();
+            lazyLoad(savedInstanceState);
         }
     }
 
@@ -42,11 +44,11 @@ public abstract class BaseContentFragment extends BaseFragment {
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        onLazyLoad();
+        onLazyLoad(mSavedInstanceState);
     }
 
     //  可见才加载
-    protected abstract void lazyLoad();
+    protected abstract void lazyLoad(Bundle savedInstanceState);
 
     //双击tab标签的事件
     public abstract void doubleClickTab();
